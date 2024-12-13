@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caracterización de Triángulo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Caracterización de Triángulo</h1>
+        <form id="triangleForm">
+            <label for="sideA">Lado A:</label>
+            <input type="number" id="sideA" required>
+            <label for="sideB">Lado B:</label>
+            <input type="number" id="sideB" required>
+            <label for="sideC">Lado C:</label>
+            <input type="number" id="sideC" required>
+            <button id="play-sound" type="submit">Caracterizar Triángulo</button>
+            <audio id="success-sound" src="success-sound.mp3" preload="auto"></audio>
+            <audio id="fail-sound" src="fail-sound.mp3" preload="auto"></audio>
+            <script>
+                document.getElementById('triangleForm').addEventListener('submit', function(event) {
+                    event.preventDefault(); 
+                    const sideA = parseFloat(document.getElementById('sideA').value);
+                    const sideB = parseFloat(document.getElementById('sideB').value);
+                    const sideC = parseFloat(document.getElementById('sideC').value);
+                    const resultDiv = document.getElementById('result');
+                    const successSound = document.getElementById("success-sound");
+                    const failSound = document.getElementById("fail-sound");
+            
+                    // Verificar si los lados forman un triángulo
+                    if (sideA + sideB > sideC && sideA + sideC > sideB && sideB + sideC > sideA) {
+                        // Si es un triángulo válido
+                        resultDiv.textContent = "Los lados forman un triángulo válido.";
+                        successSound.play().catch(error => {
+                            console.error("Error al reproducir el sonido:", error);
+                        });
+                    } else {
+                        // Si no es un triángulo válido
+                        resultDiv.textContent = "Los lados no forman un triángulo válido.";
+                        failSound.play().catch(error => {
+                            console.error("Error al reproducir el sonido:", error);
+                        });
+                    }
+                });
+            </script>  
+        </form>
+        <div id="result" class="result"></div>
+    </div> 
+    <script src="script.js"></script>
+
+
+</body>
+</html>
+
+

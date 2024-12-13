@@ -1,0 +1,65 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.Write("Ingrese el lado a: ");
+        double a = Convert.ToDouble(Console.ReadLine());
+
+        Console.Write("Ingrese el lado b: ");
+        double b = Convert.ToDouble(Console.ReadLine());
+
+        Console.Write("Ingrese el lado c: ");
+        double c = Convert.ToDouble(Console.ReadLine());
+
+        caracterizarTriangulo(a, b, c);
+    }
+
+    static void caracterizarTriangulo(double a, double b, double c)
+    {
+        // Verificar si los lados forman un triángulo válido
+        if (a + b > c && a + c > b && b + c > a)
+        {
+            // Calcular los ángulos utilizando la ley de los cosenos
+            double A = Math.Acos((b * b + c * c - a * a) / (2 * b * c));
+            double B = Math.Acos((a * a + c * c - b * b) / (2 * a * c));
+            double C = Math.Acos((a * a + b * b - c * c) / (2 * a * b));
+
+            // Convertir los ángulos a grados
+            A = A * 180 / Math.PI;
+            B = B * 180 / Math.PI;
+            C = C * 180 / Math.PI;
+
+            // Caracterizar el triángulo
+            string caracterizacion;
+            if (a == b && a == c)
+            {
+                caracterizacion = "Equilátero";
+            }
+            else if (a == b || a == c || b == c)
+            {
+                caracterizacion = "Isósceles";
+            }
+            else
+            {
+                caracterizacion = "Escaleno";
+            }
+
+            // Imprimir los resultados
+            Console.WriteLine("Lados:");
+            Console.WriteLine($"a = {a}");
+            Console.WriteLine($"b = {b}");
+            Console.WriteLine($"c = {c}");
+            Console.WriteLine("Ángulos:");
+            Console.WriteLine($"A = {A:F2}°");
+            Console.WriteLine($"B = {B:F2}°");
+            Console.WriteLine($"C = {C:F2}°");
+            Console.WriteLine($"Caracterización: {caracterizacion}");
+        }
+        else
+        {
+            Console.WriteLine("Los lados ingresados no forman un triángulo válido");
+        }
+    }
+}
